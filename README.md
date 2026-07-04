@@ -27,6 +27,8 @@ Each tool accepts specs inline (`baseSpecContent` / `targetSpecContent`) or by p
 _`run_governance_review` is planned — it ships once the backend governance endpoint
 lands._
 
+> Full setup, verification & troubleshooting: **[docs/mcp-server-setup.md](docs/mcp-server-setup.md)**.
+
 ## Install
 
 Requires **Node.js ≥ 20** and a SpecShield API key (from
