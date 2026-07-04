@@ -35,7 +35,7 @@ Requires **Node.js ≥ 20** and a SpecShield API key (from
 [specshield.io/account](https://specshield.io/account)).
 
 ```bash
-npx -y @specshield/mcp-server
+npx -y specshield-mcp-server
 ```
 
 ### Claude Desktop
@@ -45,7 +45,7 @@ npx -y @specshield/mcp-server
   "mcpServers": {
     "specshield": {
       "command": "npx",
-      "args": ["-y", "@specshield/mcp-server"],
+      "args": ["-y", "specshield-mcp-server"],
       "env": { "SPECSHIELD_API_KEY": "ss_your_key_here" }
     }
   }
@@ -54,7 +54,7 @@ npx -y @specshield/mcp-server
 
 ### Claude Code
 ```bash
-claude mcp add specshield --env SPECSHIELD_API_KEY=ss_your_key_here -- npx -y @specshield/mcp-server
+claude mcp add specshield --env SPECSHIELD_API_KEY=ss_your_key_here -- npx -y specshield-mcp-server
 ```
 
 ### Cursor
@@ -64,7 +64,7 @@ claude mcp add specshield --env SPECSHIELD_API_KEY=ss_your_key_here -- npx -y @s
   "mcpServers": {
     "specshield": {
       "command": "npx",
-      "args": ["-y", "@specshield/mcp-server"],
+      "args": ["-y", "specshield-mcp-server"],
       "env": { "SPECSHIELD_API_KEY": "ss_your_key_here" }
     }
   }

@@ -25,12 +25,12 @@ SpecShield backend and is **read-only / analyze-only — it never modifies your 
 ### Option A — `npx` (recommended)
 No global install; the client launches it on demand:
 ```bash
-npx -y @specshield/mcp-server
+npx -y specshield-mcp-server
 ```
 
 ### Option B — global install
 ```bash
-npm install -g @specshield/mcp-server
+npm install -g specshield-mcp-server
 specshield-mcp        # the installed binary
 ```
 
@@ -63,7 +63,7 @@ Edit `claude_desktop_config.json`:
   "mcpServers": {
     "specshield": {
       "command": "npx",
-      "args": ["-y", "@specshield/mcp-server"],
+      "args": ["-y", "specshield-mcp-server"],
       "env": { "SPECSHIELD_API_KEY": "ss_your_key_here" }
     }
   }
@@ -75,7 +75,7 @@ Fully quit and reopen Claude Desktop after editing.
 ```bash
 claude mcp add specshield \
   --env SPECSHIELD_API_KEY=ss_your_key_here \
-  -- npx -y @specshield/mcp-server
+  -- npx -y specshield-mcp-server
 ```
 Or commit a project-scoped `.mcp.json` (shareable with your team) using the same
 `mcpServers` shape as above.
@@ -89,7 +89,7 @@ Or commit a project-scoped `.mcp.json` (shareable with your team) using the same
   "mcpServers": {
     "specshield": {
       "command": "npx",
-      "args": ["-y", "@specshield/mcp-server"],
+      "args": ["-y", "specshield-mcp-server"],
       "env": { "SPECSHIELD_API_KEY": "ss_your_key_here" }
     }
   }
@@ -97,7 +97,7 @@ Or commit a project-scoped `.mcp.json` (shareable with your team) using the same
 ```
 
 ### Any other stdio MCP client
-Point it at `command: npx`, `args: ["-y", "@specshield/mcp-server"]`, and set
+Point it at `command: npx`, `args: ["-y", "specshield-mcp-server"]`, and set
 `SPECSHIELD_API_KEY` in the environment.
 
 ---
@@ -199,7 +199,7 @@ spec content or keys).
 ## 9. Uninstall
 
 - Remove the `specshield` entry from your client's MCP config.
-- If globally installed: `npm uninstall -g @specshield/mcp-server`.
+- If globally installed: `npm uninstall -g specshield-mcp-server`.
 - `npx` leaves nothing to remove beyond its cache.
 
 ---

@@ -3,10 +3,10 @@
 Distribution is the point of this phase. Treat listing as a launch. Shared copy below.
 
 **Name:** SpecShield
-**Package:** `@specshield/mcp-server`
-**Install:** `npx -y @specshield/mcp-server`
+**Package:** `specshield-mcp-server`
+**Install:** `npx -y specshield-mcp-server`
 **Homepage:** https://specshield.io
-**Repository:** (set on publish)
+**Repository:** https://github.com/specshield26/specshield-mcp-server
 **Categories/tags:** `api`, `openapi`, `developer-tools`, `testing`, `ci-cd`, `contract-testing`
 **One-liner:** The API-change deploy gate for AI coding agents — "is it safe to ship this API change to my consumers?" Read-only.
 
@@ -21,8 +21,7 @@ Distribution is the point of this phase. Treat listing as a launch. Shared copy 
 
 ## Checklist (do at publish time)
 
-- [ ] Publish `@specshield/mcp-server` to npm (`npm publish --access public`).
-- [ ] Set `repository` + `bugs` URLs in `package.json`, re-publish.
+- [ ] Publish `specshield-mcp-server` to npm (`npm login && npm publish`; unscoped, no org/--access needed).
 - [ ] **Official MCP Registry** — publish `server.json` (namespace-verified). Draft below.
 - [ ] **mcp.so** — submit listing (name, description, install cmd, tags, homepage).
 - [ ] **smithery.ai** — add server (supports the `npx` command form + env schema).
@@ -42,7 +41,7 @@ Distribution is the point of this phase. Treat listing as a launch. Shared copy 
   "packages": [
     {
       "registryType": "npm",
-      "identifier": "@specshield/mcp-server",
+      "identifier": "specshield-mcp-server",
       "version": "0.1.0",
       "transport": { "type": "stdio" },
       "environmentVariables": [
@@ -68,7 +67,7 @@ by name within a section; legend: `📇` = TypeScript, `☁️` = cloud/SaaS-bac
 **Entry line (paste this):**
 
 ```markdown
-- [specshield/specshield-mcp-server](https://github.com/specshield/specshield-mcp-server) 📇 ☁️ - The API-change deploy gate for AI coding agents: "is it safe to ship this API change to my consumers?" Analyze-only OpenAPI breaking-change detection + migration guides.
+- [specshield26/specshield-mcp-server](https://github.com/specshield26/specshield-mcp-server) 📇 ☁️ - The API-change deploy gate for AI coding agents: "is it safe to ship this API change to my consumers?" Analyze-only OpenAPI breaking-change detection + migration guides.
 ```
 
 > ⚠️ Replace the URL with wherever you actually push the repo (the `specshield/…`
