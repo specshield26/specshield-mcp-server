@@ -1,0 +1,14 @@
+src/
+test/
+scripts/
+registry/
+node_modules/
+.github/
+tsconfig.json
+vitest.config.ts
+eslint.config.js
+.prettierrc.json
+.gitignore
+*.log
+.env
+coverage/
