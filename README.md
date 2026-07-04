@@ -11,6 +11,8 @@ is **read-only / analyze-only — it never modifies your code.**
 > changes. SpecShield's job is the *decision*: **can I deploy this?** — the deploy
 > gate is the hero tool here.
 
+> ⚙️ **In CI/CD instead of an agent?** The [`specshield` CLI](https://www.npmjs.com/package/specshield) runs the same breaking-change and `can-i-deploy` checks in your pipeline (GitHub Action, exit codes). Same job, two entry points: this server for AI agents, the CLI for CI/CD.
+
 ## Tools
 
 | # | Tool | What it answers |
