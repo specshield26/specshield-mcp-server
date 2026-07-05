@@ -36,13 +36,13 @@ Distribution is the point of this phase. Treat listing as a launch. Shared copy 
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "io.specshield/mcp-server",
   "description": "The API-change deploy gate for AI coding agents: is it safe to ship this API change to my consumers? Read-only.",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "homepage": "https://specshield.io",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "specshield-mcp-server",
-      "version": "0.1.0",
+      "version": "1.0.1",
       "transport": { "type": "stdio" },
       "environmentVariables": [
         { "name": "SPECSHIELD_API_KEY", "description": "SpecShield API key", "isRequired": true, "isSecret": true },

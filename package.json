@@ -1,6 +1,7 @@
 {
   "name": "specshield-mcp-server",
-  "version": "0.1.0",
+  "version": "1.0.1",
+  "mcpName": "io.github.specshield26/specshield-mcp-server",
   "description": "SpecShield MCP server — the API-change deploy gate for AI coding agents. Ask 'is it safe to ship this API change to my consumers?' inside Claude, Cursor, and other MCP clients. Analyze-only; it never modifies code.",
   "license": "MIT",
   "author": "SpecShield Software Private Limited",
