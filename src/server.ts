@@ -6,7 +6,7 @@ import { TOOLS } from "./tools/index.js";
 import { HELP_TEXT } from "./resources/help.js";
 
 export const SERVER_NAME = "specshield-mcp-server";
-export const SERVER_VERSION = "1.0.1";
+export const SERVER_VERSION = "1.0.2";
 
 export interface ServerDeps {
   client: SpecShieldApiClient;

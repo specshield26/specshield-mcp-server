@@ -43,6 +43,13 @@ export class SpecShieldApiClient {
 
   /** POST a JSON body and return the parsed JSON response. */
   async post<T>(path: string, body: unknown): Promise<T> {
+    if (!this.config.apiKey) {
+      throw new SpecShieldError(
+        "config_error",
+        "SPECSHIELD_API_KEY is required. Set it to a SpecShield API key from " +
+          "https://specshield.io/account (store it as a secret; never commit it).",
+      );
+    }
     const url = `${this.config.apiUrl}${path}`;
 
     for (let attempt = 1; ; attempt++) {

@@ -35,6 +35,17 @@ describe("SpecShieldApiClient", () => {
     expect((init.headers as Record<string, string>)["X-Api-Key"]).toBe("ss_secret_key_value");
   });
 
+  it("returns config_error (and never calls fetch) when no API key is set", async () => {
+    const fetchImpl = vi.fn();
+    const c = new SpecShieldApiClient({ ...CONFIG, apiKey: "" }, logger, {
+      fetchImpl,
+      maxAttempts: 3,
+      baseDelayMs: 0,
+    });
+    await expect(c.post("/x", {})).rejects.toMatchObject({ code: "config_error" });
+    expect(fetchImpl).not.toHaveBeenCalled();
+  });
+
   it("does NOT retry a 401 and reports auth_error", async () => {
     const fetchImpl = vi.fn().mockResolvedValue(res(401, { error: "nope" }));
     await expect(client(fetchImpl).post("/x", {})).rejects.toMatchObject({ code: "auth_error" });

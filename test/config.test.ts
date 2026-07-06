@@ -1,19 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { loadConfig } from "../src/config.js";
-import { ConfigError } from "../src/errors.js";
 
 describe("loadConfig", () => {
-  it("throws ConfigError when the API key is missing", () => {
-    expect(() => loadConfig({})).toThrow(ConfigError);
-  });
-
-  it("never includes the key value in the missing-key error", () => {
-    try {
-      loadConfig({});
-    } catch (err) {
-      expect((err as Error).message).not.toContain("SPECSHIELD_API_KEY=");
-      expect((err as Error).message).toContain("required");
-    }
+  it("does not throw when the API key is missing (enforced later, at call time)", () => {
+    const cfg = loadConfig({});
+    expect(cfg.apiKey).toBe("");
+    expect(cfg.apiUrl).toBe("https://api.specshield.io");
   });
 
   it("applies defaults", () => {

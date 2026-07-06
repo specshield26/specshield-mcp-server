@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
   "name": "io.github.specshield26/specshield-mcp-server",
   "description": "The API-change deploy gate for AI coding agents: is it safe to ship this API change to my consumers? Read-only.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "url": "https://github.com/specshield26/specshield-mcp-server",
     "source": "github"
@@ -11,7 +11,7 @@
     {
       "registryType": "npm",
       "identifier": "specshield-mcp-server",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "transport": { "type": "stdio" },
       "environmentVariables": [
         { "name": "SPECSHIELD_API_KEY", "description": "SpecShield API key", "isRequired": true, "isSecret": true },

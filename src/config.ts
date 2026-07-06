@@ -1,5 +1,3 @@
-import { ConfigError } from "./errors.js";
-
 export type LogLevel = "debug" | "info" | "warn" | "error";
 
 export interface SpecShieldConfig {
@@ -19,13 +17,11 @@ const LOG_LEVELS: readonly LogLevel[] = ["debug", "info", "warn", "error"];
  * echoing the key) when the key is missing.
  */
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): SpecShieldConfig {
-  const apiKey = env.SPECSHIELD_API_KEY?.trim();
-  if (!apiKey) {
-    throw new ConfigError(
-      "SPECSHIELD_API_KEY is required. Set it to a SpecShield API key from " +
-        "https://specshield.io/account (store it as a secret; never commit it).",
-    );
-  }
+  // The key is optional at load time so the server can start and answer MCP
+  // introspection (tools/list) without any secret — e.g. Glama's automated
+  // checks, or a client inspecting the server before it's configured. It is
+  // enforced the moment a tool actually calls the backend (SpecShieldApiClient).
+  const apiKey = env.SPECSHIELD_API_KEY?.trim() ?? "";
 
   const apiUrl = (env.SPECSHIELD_API_URL?.trim() || DEFAULT_API_URL).replace(/\/+$/, "");
 

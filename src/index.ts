@@ -9,6 +9,12 @@ import { SpecShieldError } from "./errors.js";
 async function main(): Promise<void> {
   const config = loadConfig();
   const logger = createLogger(config.logLevel);
+  if (!config.apiKey) {
+    logger.warn(
+      "SPECSHIELD_API_KEY is not set — the server will start and list its tools, " +
+        "but tool calls will return a config error until it is configured.",
+    );
+  }
   const client = new SpecShieldApiClient(config, logger);
   const server = createServer({ client, logger });
 
