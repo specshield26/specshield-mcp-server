@@ -1,0 +1,28 @@
+# Smithery configuration for specshield-mcp-server.
+# Tells Smithery how to run the server (stdio) and what config the user provides.
+# Docs: https://smithery.ai/docs
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - specshieldApiKey
+    properties:
+      specshieldApiKey:
+        type: string
+        title: SpecShield API Key
+        description: Your SpecShield API key from https://specshield.io/account (kept secret).
+      specshieldApiUrl:
+        type: string
+        title: SpecShield API URL (optional)
+        description: Override the backend base URL (self-hosted / staging).
+        default: https://api.specshield.io
+  commandFunction: |
+    (config) => ({
+      command: "npx",
+      args: ["-y", "specshield-mcp-server"],
+      env: Object.assign(
+        { SPECSHIELD_API_KEY: config.specshieldApiKey },
+        config.specshieldApiUrl ? { SPECSHIELD_API_URL: config.specshieldApiUrl } : {}
+      )
+    })
