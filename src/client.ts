@@ -80,6 +80,14 @@ export class SpecShieldApiClient {
             status,
           );
         }
+        if (status === 402) {
+          throw new SpecShieldError(
+            "payment_required",
+            "This SpecShield feature requires a paid plan (Team or above). " +
+              "Upgrade at https://specshield.io/pricing, then retry with a paid API key.",
+            status,
+          );
+        }
         if (status >= 400 && status < 500 && status !== 429) {
           throw new SpecShieldError(
             "validation_error",

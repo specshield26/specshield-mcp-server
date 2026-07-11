@@ -19,7 +19,7 @@ async function connect(responses: Record<string, unknown>) {
 }
 
 describe("MCP server", () => {
-  it("registers the tools in pitch order (deploy gate first, diff last)", async () => {
+  it("registers the tools in pitch order (deploy gate first, paid governance last)", async () => {
     const { client } = await connect({});
     const names = (await client.listTools()).tools.map((t) => t.name);
     expect(names).toEqual([
@@ -28,17 +28,18 @@ describe("MCP server", () => {
       "generate_migration_guide",
       "generate_release_notes",
       "compare_specs",
+      "run_governance_review",
     ]);
     expect(names[0]).toBe("is_change_safe");
-    expect(names[names.length - 1]).toBe("compare_specs");
+    expect(names[names.length - 1]).toBe("run_governance_review");
   });
 
-  it("does not expose run_governance_review or any mutation tool in the MVP", async () => {
+  it("exposes governance and keeps every tool read-only / analyze-only", async () => {
     const { client } = await connect({});
-    const names = (await client.listTools()).tools.map((t) => t.name);
-    expect(names).not.toContain("run_governance_review");
-    // every tool is read-only / analyze-only
     const tools = (await client.listTools()).tools;
+    const names = tools.map((t) => t.name);
+    expect(names).toContain("run_governance_review");
+    // no mutation/shell tools; every tool is read-only
     for (const t of tools) {
       expect(t.annotations?.readOnlyHint).toBe(true);
     }

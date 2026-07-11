@@ -43,7 +43,7 @@ await mcp.connect(clientTransport);
 
 const tools = (await mcp.listTools()).tools.map((t) => t.name);
 console.log("tools:", tools.join(", "));
-if (tools[0] !== "is_change_safe" || tools[tools.length - 1] !== "compare_specs") {
+if (tools[0] !== "is_change_safe" || tools[tools.length - 1] !== "run_governance_review") {
   throw new Error("tool order regression");
 }
 

@@ -22,12 +22,14 @@ is **read-only / analyze-only — it never modifies your code.**
 | 3 | `generate_migration_guide` | Migration guide (markdown) + safe rollout steps |
 | 4 | `generate_release_notes` | Release notes for developer / customer / internal |
 | 5 | `compare_specs` | The raw diff (breaking / additions / modifications / warnings) + risk score |
+| 6 | `run_governance_review` 🔒 | API governance ruleset beyond breaking changes (missing operationId, error responses, security scheme, pagination, versioning…) → located findings + suggested fixes. **Paid (Team+)** |
 
-Each tool accepts specs inline (`baseSpecContent` / `targetSpecContent`) or by path
-(`baseSpecPath` / `targetSpecPath`).
+Tools 1–5 accept specs inline (`baseSpecContent` / `targetSpecContent`) or by path
+(`baseSpecPath` / `targetSpecPath`). `run_governance_review` reviews a single spec
+(`specContent` / `specPath`).
 
-_`run_governance_review` is planned — it ships once the backend governance endpoint
-lands._
+🔒 `run_governance_review` is a paid feature — a FREE API key returns a
+`payment_required` error. Upgrade at [specshield.io/pricing](https://specshield.io/pricing).
 
 > Full setup, verification & troubleshooting: **[docs/mcp-server-setup.md](docs/mcp-server-setup.md)**.
 

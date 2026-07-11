@@ -58,3 +58,20 @@ export interface MigrationAdvice {
   steps: string[];
   language: string;
 }
+
+/** A single governance finding (POST /api/governance/review). */
+export interface GovernanceFinding {
+  ruleId: string;
+  severity: string; // "error" | "warning" | "info"
+  message: string;
+  suggestedFix: string | null;
+}
+
+/** POST /api/governance/review — paid (Team plan or above). */
+export interface GovernanceReviewResponse {
+  findings: GovernanceFinding[];
+  errorCount: number;
+  warningCount: number;
+  infoCount: number;
+  summary: string;
+}

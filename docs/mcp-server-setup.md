@@ -119,15 +119,15 @@ retried.
 
 ## 5. Verify it works
 
-1. **List tools in your client.** You should see five tools, in this order:
+1. **List tools in your client.** You should see six tools, in this order:
    `is_change_safe`, `explain_breaking_changes`, `generate_migration_guide`,
-   `generate_release_notes`, `compare_specs`.
+   `generate_release_notes`, `compare_specs`, `run_governance_review`.
 2. **Read the help resource** `specshield://help/tools`.
 3. **Ask the deploy gate** (see example prompts below).
 4. **From source**, run the offline smoke test (no backend needed):
    ```bash
    npm run smoke
-   # → tools: is_change_safe, …, compare_specs
+   # → tools: is_change_safe, …, run_governance_review
    # → is_change_safe → ⛔/✅ …
    # → SMOKE OK
    ```
@@ -143,17 +143,21 @@ retried.
 | `generate_migration_guide` | Migration guide (markdown) + rollout steps. |
 | `generate_release_notes` | Release notes for developer / customer / internal. |
 | `compare_specs` | The raw diff + risk score. |
+| `run_governance_review` 🔒 | API governance ruleset beyond breaking changes → located findings + suggested fixes. **Paid (Team+).** |
 
-Each tool takes specs inline (`baseSpecContent` / `targetSpecContent`) or by path
-(`baseSpecPath` / `targetSpecPath`).
+Tools 1–5 take specs inline (`baseSpecContent` / `targetSpecContent`) or by path
+(`baseSpecPath` / `targetSpecPath`). `run_governance_review` reviews a single spec
+(`specContent` / `specPath`).
 
 Example prompts (lead with the gate):
 - *"Here are my old and new `openapi.yaml` — is it safe to ship this API change to my consumers?"*
 - *"Compare `v1.yaml` and `v2.yaml` and tell me if I can deploy, and why not."*
 - *"Explain the breaking changes and how consumers should migrate."*
+- *"Run a governance review on `openapi.yaml` and list what to fix."*
 
-> `run_governance_review` is **planned** — it ships once the backend governance
-> endpoint lands. It is intentionally not registered yet.
+> 🔒 `run_governance_review` is a **paid** feature (Team plan or above). With a FREE
+> API key it returns a `payment_required` error — upgrade at
+> [specshield.io/pricing](https://specshield.io/pricing).
 
 ---
 

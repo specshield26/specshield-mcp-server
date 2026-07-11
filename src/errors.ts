@@ -6,6 +6,7 @@ export type ErrorCode =
   | "config_error"
   | "validation_error"
   | "auth_error"
+  | "payment_required"
   | "rate_limited"
   | "backend_error"
   | "timeout"

@@ -8,6 +8,7 @@ import { explainBreakingChanges } from "../src/tools/explainBreakingChanges.js";
 import { generateMigrationGuide } from "../src/tools/generateMigrationGuide.js";
 import { generateReleaseNotes } from "../src/tools/generateReleaseNotes.js";
 import { compareSpecs } from "../src/tools/compareSpecs.js";
+import { runGovernanceReview } from "../src/tools/runGovernanceReview.js";
 
 const logger = createLogger("error");
 
@@ -116,5 +117,50 @@ describe("the other tools call the backend and never echo the input spec", () =>
     const out = await compareSpecs.handler({ ...SPECS, failOnBreaking: true }, ctx);
     expect(text(out)).toContain("failOnBreaking");
     expect(text(out)).not.toContain("SECRET_TARGET_SPEC");
+  });
+});
+
+describe("run_governance_review (paid)", () => {
+  const SPEC = { specContent: "SECRET_GOV_SPEC" };
+
+  it("posts a single spec to /api/governance/review and surfaces findings", async () => {
+    const { ctx, post } = ctxWith({
+      "/api/governance/review": {
+        findings: [
+          { ruleId: "security-scheme-missing", severity: "warning", message: "GET /Users: no security", suggestedFix: "Declare security." },
+        ],
+        errorCount: 0,
+        warningCount: 1,
+        infoCount: 0,
+        summary: "1 finding(s): 0 error, 1 warning, 0 info.",
+      },
+    });
+    const out = await runGovernanceReview.handler(SPEC, ctx);
+    expect(post).toHaveBeenCalledWith(
+      "/api/governance/review",
+      expect.objectContaining({ spec: "SECRET_GOV_SPEC" }),
+    );
+    expect(out.isError).toBeFalsy();
+    expect(text(out)).toContain("security-scheme-missing");
+    expect(text(out)).toContain("1 finding(s)");
+  });
+
+  it("returns a validation error when no spec is provided", async () => {
+    const { ctx, post } = ctxWith({});
+    const out = await runGovernanceReview.handler({}, ctx);
+    expect(out.isError).toBe(true);
+    expect(text(out)).toContain("validation_error");
+    expect(post).not.toHaveBeenCalled();
+  });
+
+  it("surfaces a paid-plan (402) error without leaking the spec", async () => {
+    const post = vi
+      .fn()
+      .mockRejectedValue(new SpecShieldError("payment_required", "requires a paid plan", 402));
+    const ctx = { client: { post } as unknown as SpecShieldApiClient, logger };
+    const out = await runGovernanceReview.handler(SPEC, ctx);
+    expect(out.isError).toBe(true);
+    expect(text(out)).toContain("payment_required");
+    expect(text(out)).not.toContain("SECRET_GOV_SPEC");
   });
 });

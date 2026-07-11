@@ -41,6 +41,20 @@ export async function resolveBothSpecs(
   return { baseSpec, targetSpec };
 }
 
+/** A single-spec input (governance reviews one spec, not a base/target pair). */
+export const singleSpecShape = {
+  specContent: z.string().optional().describe("Inline OpenAPI spec content (YAML or JSON)."),
+  specPath: z.string().optional().describe("Path to an OpenAPI spec file."),
+};
+
+export async function resolveSingleSpec(args: Record<string, unknown>): Promise<string> {
+  const content = args.specContent as string | undefined;
+  const path = args.specPath as string | undefined;
+  if (content && content.trim().length > 0) return content;
+  if (path && path.trim().length > 0) return resolveSpec({ path }, "OpenAPI");
+  throw new SpecShieldError("validation_error", "Provide either specContent or specPath.");
+}
+
 export function textResult(header: string, data: unknown): CallToolResult {
   const body = JSON.stringify(data, null, 2);
   return { content: [{ type: "text", text: header ? `${header}\n\n${body}` : body }] };

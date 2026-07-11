@@ -15,14 +15,15 @@ contract compatibility and never modify your code.
 4. **generate_release_notes** — release notes for developer/customer/internal audiences.
 5. **compare_specs** — the raw diff (breaking / additions / modifications / warnings)
    with a risk score. Prefer is_change_safe for a go/no-go decision.
+6. **run_governance_review** — deterministic API governance ruleset (design/policy
+   checks beyond breaking changes: missing operationId, undocumented error responses,
+   no security scheme, missing pagination, and more). Reviews a single spec via
+   \`specContent\`/\`specPath\`. **Paid feature** (Team plan or above; a FREE key
+   returns a \`payment_required\` error).
 
-Each tool accepts specs as inline content (\`baseSpecContent\`/\`targetSpecContent\`)
-or file paths (\`baseSpecPath\`/\`targetSpecPath\`).
-
-## Planned
-
-- **run_governance_review** — deterministic API governance ruleset. Ships once the
-  backend \`/api/governance\` endpoint lands (a later release).
+Tools 1–5 accept specs as inline content (\`baseSpecContent\`/\`targetSpecContent\`)
+or file paths (\`baseSpecPath\`/\`targetSpecPath\`); run_governance_review takes a
+single spec (\`specContent\`/\`specPath\`).
 
 ## Privacy
 
